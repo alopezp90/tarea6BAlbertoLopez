@@ -1,5 +1,7 @@
 package hospital;
 
+import java.util.Objects;
+
 /**
  * @author Alberto López Puertas
  * <alopezp90@gmail.com>
@@ -35,5 +37,30 @@ public class Medico extends Empleado {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 59 * hash + Objects.hashCode(this.especialidad);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Medico other = (Medico) obj;
+        if (!Objects.equals(this.especialidad, other.especialidad)) {
+            return false;
+        }
+        return true;
     }
 }

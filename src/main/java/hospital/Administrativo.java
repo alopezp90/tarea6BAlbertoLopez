@@ -1,5 +1,7 @@
 package hospital;
 
+import java.util.Objects;
+
 /**
  * @author Alberto López Puertas
  * <alopezp90@gmail.com>
@@ -21,7 +23,7 @@ public class Administrativo extends Empleado{
 
     @Override
     public void tomarCafe() {
-        System.out.println(this.getNombre() + "se toma un cafe junto al despacho.");
+        System.out.println(this.getNombre() + " se toma un cafe junto al despacho.");
     }
     
     @Override
@@ -41,5 +43,30 @@ public class Administrativo extends Empleado{
 
     public void setGrupo(Grupo grupo) {
         this.grupo = grupo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.grupo);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Administrativo other = (Administrativo) obj;
+        if (this.grupo != other.grupo) {
+            return false;
+        }
+        return true;
     }
 }
