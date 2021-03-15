@@ -8,8 +8,6 @@ import java.util.ArrayList;
  */
 public class GestionHospital {
 
-    private static Hospital hospital;
-
     private static ArrayList<Empleado> crearMedicos() {
         ArrayList<Empleado> listado = new ArrayList<>();
         listado.add(new Medico("Carlos", "Sastre", "23654567", "123456789", 1800, "Traumatologia"));
@@ -37,7 +35,7 @@ public class GestionHospital {
 
     public static void main(String[] args) {
 
-        hospital = new Hospital("MarAlboran", "C/ Fuente de maria Gil 30, Estepona", 300);
+        Hospital hospital = new Hospital("MarAlboran", "C/ Fuente de maria Gil 30, Estepona", 300);
 
         for (Empleado empleado : crearMedicos()) {
             hospital.contratarEmpleado(empleado);
@@ -58,20 +56,23 @@ public class GestionHospital {
         //coge al medico Carlos Sastre
         Medico m1 = null;
         for (Empleado empleado : hospital.getListaEmpleados()) {
-            if (empleado.getClass() == (new Medico("", "", "123456789", "", 0, "").getClass())) {
+            if (empleado instanceof Medico) {
+                //(correccion)if (empleado.getClass() == (new Medico("", "", "123456789", "", 0, "").getClass())) {
                 if (empleado.getNombre().equals("Carlos") && empleado.getApellidos().equals("Sastre")) {
                     m1 = (Medico) empleado;
                 }
             }
         }
-        
+
         //coge el primer paciente que salga
         Paciente p1 = null;
-        for(Paciente paciente : hospital.getListaPacientes()) {
+        for (Paciente paciente : hospital.getListaPacientes()) {
             p1 = paciente;
             break;
         }
-        
-        m1.tratarPaciente(p1, "Paracetamol");
+
+        if (m1 != null) {
+            m1.tratarPaciente(p1, "Paracetamol");
+        }
     }
 }
